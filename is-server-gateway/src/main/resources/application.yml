@@ -1,0 +1,33 @@
+server:
+  port: 9070
+spring:
+  redis:
+    # Redis服务器地址
+    host: localhost
+    # Redis服务器连接端口
+    port: 6379
+#网关配置
+zuul:
+  sensitive-headers:
+  routes:
+    token:
+      url: http://localhost:9090
+    order:
+      url: http://localhost:9080
+  #限流ratelimit配置
+  ratelimit:
+    enabled: true
+    repository: REDIS
+    default-policy-list:
+      - limit: 2 #optional - request number limit per refresh interval window
+        quota: 1 #optional - request time limit per refresh interval window (in seconds)
+        refresh-interval: 1 #default value (in seconds)
+        type: #optional
+           - url # 根据请求url 例如:/a /b
+           - httpmethod # 根据请求方式get post put delete
+#           - user  # 根据用户配合security使用,不常用
+#           - origin 根据ip地址
+
+
+
+

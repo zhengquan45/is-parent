@@ -1,0 +1,10 @@
+server:
+  port: 9090
+spring:
+  application:
+    name: server-auth
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://119.3.16.132:3306/imooc-security?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+    driver-class-name: com.mysql.cj.jdbc.Driver
