@@ -1,0 +1,8 @@
+spring:
+  devtools:
+    livereload:
+      enabled: true #是否支持livereload
+      port: 35729
+    restart:
+      #需要实时更新的目录
+      additional-paths: static/**

@@ -1,0 +1,5 @@
+#! /bin/sh
+cd $(dirname $0)
+PATH="$PWD/node":$PATH
+node_modules/@vue/cli/bin/vue.js "$@"
+

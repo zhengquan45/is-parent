@@ -1,4 +1,4 @@
 .idea/
 target/
 *.iml
-*.rar
+node_modules/
