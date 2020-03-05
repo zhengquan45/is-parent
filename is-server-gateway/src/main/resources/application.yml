@@ -13,7 +13,7 @@ zuul:
     token:
       url: http://localhost:9090
     order:
-      url: http://localhost:9080
+      url: http://localhost:9081
   #限流ratelimit配置
   ratelimit:
     enabled: true
