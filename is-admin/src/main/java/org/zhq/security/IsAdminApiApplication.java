@@ -3,6 +3,7 @@ package org.zhq.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.http.*;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -14,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 import javax.servlet.http.HttpSession;
 
 @SpringBootApplication
+@EnableZuulProxy
 @RestController
 public class IsAdminApiApplication {
 

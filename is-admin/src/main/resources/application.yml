@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: admin
   devtools:
     livereload:
       enabled: true #是否支持livereload
@@ -6,3 +8,9 @@ spring:
     restart:
       #需要实时更新的目录
       additional-paths: static/**
+
+zuul:
+  sensitive-headers:
+  routes:
+    api:
+      url: http://gateway.zhq.com:9070

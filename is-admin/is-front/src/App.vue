@@ -3,6 +3,9 @@
     <template v-if="authenticated">
     <img alt="Vue logo" src="./assets/logo.png">
     <div style="font-size: 30px">Hello MicroServer !</div>
+    <Button @click="getOrder()">Get Order</Button>
+    <p>order id : {{order.id}}</p>
+    <p>order product id : {{order.productId}}</p>
     </template>
     <template v-else>
     <Row>
@@ -46,6 +49,7 @@ export default {
         username: '',
         password: ''
       },
+      order:{},
       ruleInline: {
         username: [
           { required: true, message: 'Please fill in the user name', trigger: 'blur' }
@@ -58,6 +62,14 @@ export default {
     }
   },
   methods: {
+    getOrder(){
+      axios.get('api/order/orders/1').then((response)=>{
+        this.order = response.data;
+        console.log(this.order);
+      }).catch(()=>{
+        this.$Message.error('get order Fail!');
+      });
+    },
     handleSubmit(name) {
       this.$refs[name].validate((valid) => {
         if (valid) {
