@@ -25,6 +25,11 @@ public class IsAdminApiApplication {
         SpringApplication.run(IsAdminApiApplication.class, args);
     }
 
+    @PostMapping("/logout")
+    public void logout(HttpSession session) {
+        session.invalidate();
+    }
+
     @PostMapping("/login")
     public void login(@RequestBody Credentials credentials, HttpSession session){
         //认证服务器验证token url请求

@@ -6,6 +6,7 @@
     <Button @click="getOrder()">Get Order</Button>
     <p>order id : {{order.id}}</p>
     <p>order product id : {{order.productId}}</p>
+    <Button @click="logout()">logout</Button>
     </template>
     <template v-else>
     <Row>
@@ -23,7 +24,7 @@
               </Input>
             </FormItem>
             <FormItem>
-              <Button type="primary" @click="handleSubmit('credentials')">Signin</Button>
+              <Button type="primary" @click="handleSubmit('credentials')">login</Button>
             </FormItem>
           </Form>
         </template>
@@ -62,6 +63,13 @@ export default {
     }
   },
   methods: {
+    logout(){
+      axios.post('logout').then(()=>{
+        this.authenticated = false;
+      }).catch(()=>{
+
+      });
+    },
     getOrder(){
       axios.get('api/order/orders/1').then((response)=>{
         this.order = response.data;
