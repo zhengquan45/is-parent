@@ -8,29 +8,6 @@
     <p>order product id : {{order.productId}}</p>
     <Button @click="logout()">logout</Button>
     </template>
-    <template v-else>
-    <Row>
-      <Col span="8" offset="8">
-        <template>
-          <Form ref="credentials" :model="credentials" :rules="ruleInline">
-            <FormItem prop="username">
-              <Input type="text" v-model="credentials.username" placeholder="Username">
-                <Icon type="ios-person-outline" slot="prepend"></Icon>
-              </Input>
-            </FormItem>
-            <FormItem prop="password">
-              <Input type="password" v-model="credentials.password" placeholder="Password">
-                <Icon type="ios-lock-outline" slot="prepend"></Icon>
-              </Input>
-            </FormItem>
-            <FormItem>
-              <Button type="primary" @click="handleSubmit('credentials')">login</Button>
-            </FormItem>
-          </Form>
-        </template>
-      </Col>
-    </Row>
-    </template>
   </div>
 </template>
 
@@ -42,6 +19,9 @@ export default {
   name: 'App',
   components: {
     HelloWorld
+  },
+  mounted(){
+    this.init();
   },
   data () {
     return {
@@ -63,6 +43,19 @@ export default {
     }
   },
   methods: {
+    async init(){
+      const res = await axios.get('me');
+      if(res.data){
+        this.authenticated = true
+      }
+      if(!this.authenticated){
+        window.location.href = 'http://auth.zhq.com:9090/oauth/authorize?' +
+                'client_id=admin&' +
+                'redirect_url=http://admin.zhq.com:8080/oauth/callback&' +
+                'response_type=code&' +
+                'state=adc';
+      }
+    },
     logout(){
       axios.post('logout').then(()=>{
         this.authenticated = false;
