@@ -56,7 +56,7 @@ public class IsAdminApiApplication {
         HttpEntity<MultiValueMap<String,String>> entity = new HttpEntity<>(params,httpHeaders);
         //restTemplate发送请求获取tokenInfo对象
         ResponseEntity<TokenInfo> responseEntity = restTemplate.exchange(oauthServiceUrl, HttpMethod.POST,entity,TokenInfo.class);
-        request.getSession().setAttribute("token",responseEntity.getBody());
+        request.getSession().setAttribute("token",responseEntity.getBody().init());
         response.sendRedirect("/");
     }
 

@@ -1,6 +1,8 @@
 server:
   port: 9070
 spring:
+  application:
+    name: server-gateway
   redis:
     # Redis服务器地址
     host: localhost
