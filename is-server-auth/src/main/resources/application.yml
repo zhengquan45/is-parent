@@ -1,5 +1,8 @@
 server:
   port: 9090
+  servlet:
+    session:
+      timeout: 2592000
 spring:
   application:
     name: server-auth
@@ -8,3 +11,12 @@ spring:
     password: 123456
     url: jdbc:mysql://119.3.16.132:3306/imooc-security?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
+  #redis
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    timeout: 3000
+  session:
+    store-type: redis
+
+
