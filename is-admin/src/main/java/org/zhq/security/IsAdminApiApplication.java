@@ -30,8 +30,8 @@ public class IsAdminApiApplication {
     }
 
     @PostMapping("/logout")
-    public void logout(HttpServletRequest request) {
-        request.getSession().invalidate();
+    public void logout(HttpSession session) {
+        session.invalidate();
     }
 
     @GetMapping("/me")

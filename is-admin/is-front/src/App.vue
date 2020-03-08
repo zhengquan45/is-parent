@@ -12,10 +12,10 @@
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import axios from 'axios'
+  import HelloWorld from './components/HelloWorld.vue'
+  import axios from 'axios'
 
-export default {
+  export default {
   name: 'App',
   components: {
     HelloWorld
@@ -58,7 +58,7 @@ export default {
     },
     logout(){
       axios.post('logout').then(()=>{
-        this.authenticated = false;
+        window.location.href = 'http://auth.zhq.com:9090/logout?redirect_url=http://admin.zhq.com:8080';
       }).catch(()=>{
 
       });
