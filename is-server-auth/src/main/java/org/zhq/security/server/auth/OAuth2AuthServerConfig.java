@@ -33,15 +33,15 @@ public class OAuth2AuthServerConfig extends AuthorizationServerConfigurerAdapter
     @Autowired
     private DataSource dataSource;
 
-    @Bean
-    public TokenStore tokenStore(){
-        return new JdbcTokenStore(dataSource);
-    };
+//    @Bean
+//    public TokenStore tokenStore(){
+//        return new JdbcTokenStore(dataSource);
+//    };
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints.userDetailsService(userDetailsService)
-                .tokenStore(tokenStore())
+//                .tokenStore(tokenStore())
                 .authenticationManager(authenticationManager);
     }
 

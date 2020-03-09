@@ -12,6 +12,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -56,7 +57,19 @@ public class IsAdminApiApplication {
         HttpEntity<MultiValueMap<String,String>> entity = new HttpEntity<>(params,httpHeaders);
         //restTemplate发送请求获取tokenInfo对象
         ResponseEntity<TokenInfo> responseEntity = restTemplate.exchange(oauthServiceUrl, HttpMethod.POST,entity,TokenInfo.class);
-        request.getSession().setAttribute("token",responseEntity.getBody().init());
+//        request.getSession().setAttribute("token",responseEntity.getBody().init());
+        Cookie accessTokenCookie = new Cookie("zhq_access_token",responseEntity.getBody().getAccess_token());
+        accessTokenCookie.setMaxAge(responseEntity.getBody().getExpires_in().intValue());
+        accessTokenCookie.setDomain("zhq.com");
+        accessTokenCookie.setPath("/");
+        response.addCookie(accessTokenCookie);
+
+        Cookie refreshTokenCookie = new Cookie("zhq_refresh_token",responseEntity.getBody().getRefresh_token());
+        refreshTokenCookie.setMaxAge(2592000);
+        refreshTokenCookie.setDomain("zhq.com");
+        refreshTokenCookie.setPath("/");
+        response.addCookie(refreshTokenCookie);
+
         response.sendRedirect("/");
     }
 

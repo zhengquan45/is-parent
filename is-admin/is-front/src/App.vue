@@ -44,10 +44,14 @@
   },
   methods: {
     async init(){
-      const res = await axios.get('me');
-      if(res.data){
-        this.authenticated = true
-      }
+      await axios.get('api/user/me').then((res)=>{
+        if(res.data){
+          console.log("me"+res);
+          this.authenticated = true
+        }
+      }).catch(()=>{
+
+      });
       if(!this.authenticated){
         window.location.href = 'http://auth.zhq.com:9090/oauth/authorize?' +
                 'client_id=admin&' +
@@ -58,6 +62,8 @@
     },
     logout(){
       axios.post('logout').then(()=>{
+        this.$cookies.remove("zhq_access_token","/","zhq.com");
+        this.$cookies.remove("zhq_refresh_token","/","zhq.com");
         window.location.href = 'http://auth.zhq.com:9090/logout?redirect_url=http://admin.zhq.com:8080';
       }).catch(()=>{
 
